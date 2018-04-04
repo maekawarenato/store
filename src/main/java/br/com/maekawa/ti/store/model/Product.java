@@ -15,11 +15,11 @@ public class Product {
     private Long id;
 
     @JsonProperty("code")
-    @Column(name = "CODE", nullable = false)
+    @Column(name = "COD_PRODUCT", nullable = false)
     private String code;
 
     @JsonProperty("description")
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DES_PRODUCT", nullable = false)
     private String description;
 
     public Long getId() {
