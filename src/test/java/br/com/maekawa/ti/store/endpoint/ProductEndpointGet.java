@@ -6,7 +6,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import static io.restassured.RestAssured.given;
 import static org.springframework.http.HttpStatus.OK;
-gic
+
+
 @RunWith(SpringRunner.class)
 @Sql(scripts = "/sql/clean-all.sql")
 @Sql(scripts = "/sql/inserts.sql")
