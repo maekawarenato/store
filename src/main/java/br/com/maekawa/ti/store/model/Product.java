@@ -9,7 +9,7 @@ public class Product {
 
     @JsonProperty("id")
     @Id
-    @SequenceGenerator(name = "event-primary", sequenceName = "SQ_PRODUCT_IDT", allocationSize = 1)
+    @SequenceGenerator(name = "product-primary", sequenceName = "SQ_PRODUCT_IDT", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product-primary")
     @Column(name = "IDT_PRODUCT", nullable = false)
     private Long id;

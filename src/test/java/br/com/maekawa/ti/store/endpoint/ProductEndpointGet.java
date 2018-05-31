@@ -20,9 +20,20 @@ public class ProductEndpointGet {
     private int port;
 
     @Test
-    public void shouldReturnOkWhenGetProduct(){
+    public void shouldReturnFirstProducts(){
         given().port(this.port)
-                .get("/rs/pruduct")
-                .then();
+                .get("/rs/product")
+                .then()
+                .log().all()
+                .statusCode(OK.value());
+    }
+
+    @Test
+    public void shouldReturnOneProduct(){
+        given().port(this.port)
+                .get("/rs/product/1")
+                .then()
+                .log().all()
+                .statusCode(OK.value());
     }
 }
