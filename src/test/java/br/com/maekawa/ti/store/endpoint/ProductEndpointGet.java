@@ -10,7 +10,6 @@ import static io.restassured.RestAssured.given;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.OK;
 
-
 @RunWith(SpringRunner.class)
 @Sql(scripts = "/sql/clean-all.sql")
 @Sql(scripts = "/sql/inserts.sql")
@@ -37,3 +36,6 @@ public class ProductEndpointGet {
                 .statusCode(OK.value());
     }
 }
+
+
+

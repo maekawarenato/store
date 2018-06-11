@@ -3,9 +3,11 @@ package br.com.maekawa.ti.store.model;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "PRODUCT")
-public class Product {
+public class Product implements Serializable {
 
     @JsonProperty("id")
     @Id
@@ -44,5 +46,37 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Product(){}
+
+    private Product(Builder builder){
+        this.id = builder.id;
+        this.code = builder.code;
+        this.description = builder.description;
+    }
+
+    public static final class Builder{
+
+        private Long id;
+        private String code;
+        private String description;
+
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setCode(String code) {
+            this.code = code;
+            return this;
+        }
+
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Product build(){ return new Product(this);}
     }
 }
