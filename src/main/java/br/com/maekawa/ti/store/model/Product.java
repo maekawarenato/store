@@ -24,6 +24,10 @@ public class Product implements Serializable {
     @Column(name = "DES_PRODUCT", nullable = false)
     private String description;
 
+    @JsonProperty("price")
+    @Column(name = "PRICE_PRODUCT", nullable = false)
+    private Double price;
+
     public Long getId() {
         return id;
     }
@@ -48,12 +52,21 @@ public class Product implements Serializable {
         this.description = description;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public Product(){}
 
     private Product(Builder builder){
         this.id = builder.id;
         this.code = builder.code;
         this.description = builder.description;
+        this.price = builder.price;
     }
 
     public static final class Builder{
@@ -61,6 +74,7 @@ public class Product implements Serializable {
         private Long id;
         private String code;
         private String description;
+        private Double price;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -74,6 +88,11 @@ public class Product implements Serializable {
 
         public Builder setDescription(String description) {
             this.description = description;
+            return this;
+        }
+
+        public Builder setPrice(Double price) {
+            this.price = price;
             return this;
         }
 

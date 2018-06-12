@@ -13,7 +13,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonPropertyOrder({
         "id",
         "code",
-        "description"
+        "description",
+        "price"
 })
 @Relation(value = "product", collectionRelation = "products")
 public class ProductResource extends ResourceSupport {
@@ -22,6 +23,7 @@ public class ProductResource extends ResourceSupport {
     private Long id;
     private String code;
     private String description;
+    private Double price;
 
     public ProductResource(){}
 
@@ -29,6 +31,7 @@ public class ProductResource extends ResourceSupport {
         this.id = product.getId();
         this.code = product.getCode();
         this.description = product.getDescription();
+        this.price = product.getPrice();
     }
 
     public String getCode() {
@@ -45,5 +48,13 @@ public class ProductResource extends ResourceSupport {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
