@@ -2,13 +2,11 @@ package br.com.maekawa.ti.store.endpoints;
 
 import br.com.maekawa.ti.store.endpoints.resource.ProductResource;
 import br.com.maekawa.ti.store.endpoints.resource.ProductResourceAssembler;
+import br.com.maekawa.ti.store.model.Product;
 import br.com.maekawa.ti.store.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +14,7 @@ import java.util.Optional;
 import static org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/rs/product", produces = HAL_JSON_VALUE)
+@RequestMapping(path = "/rs/products", produces = HAL_JSON_VALUE)
 public class ProductEndpoint {
 
     private ProductRepository productRepository;
@@ -44,5 +42,22 @@ public class ProductEndpoint {
                 .map(productResourceAssembler::toResource)
                 .map(ResponseEntity::ok)
                 .orElse(null);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductResource> saveProduct(final @RequestBody ProductResource productResource){
+
+        Product product = new Product.Builder()
+                                .setDescription(productResource.getDescription())
+                                .setPrice(productResource.getPrice())
+                                .setCode(productResource.getCode())
+                                .build();
+
+        return Optional.of(productRepository.save(product))
+                .map(productResourceAssembler::toResource)
+                .map(ResponseEntity::ok)
+                .orElseThrow(RuntimeException::new);
+
+
     }
 }

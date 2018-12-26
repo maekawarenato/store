@@ -18,12 +18,6 @@ public class Sales implements Serializable {
     @Column(name = "IDT_SALES", nullable = false)
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "SALES_PRODUCT",
-                joinColumns = { @JoinColumn(name = "IDT_PRODUCT")},
-                inverseJoinColumns = { @JoinColumn(name = "IDT_SALES") })
-    private List<Product> productList;
-
     @JsonProperty("discount")
     @Column(name = "SALES_DISCOUNT", nullable = false)
     private Double discount;
@@ -32,42 +26,28 @@ public class Sales implements Serializable {
     @Column(name = "SALES_DATE", nullable = false)
     private Date datSales;
 
+    @OneToMany(cascade = CascadeType.ALL)
+//    @Embedded
+    private List<SalesProduct> salesProductList;
+
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
     }
 
     public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
     public Date getDatSales() {
         return datSales;
     }
 
-    public void setDatSales(Date datSales) {
-        this.datSales = datSales;
+    public List<SalesProduct> getSalesProductList() {
+        return salesProductList;
     }
 
-        public Double getSalesValue(){
-        return productList.stream()
-                .map(product -> product.getPrice())
-                .mapToDouble(Double::doubleValue).sum() - discount;
+    public void setSalesProductList(List<SalesProduct> salesProductList) {
+        this.salesProductList = salesProductList;
     }
 
     public Sales() {
@@ -75,25 +55,20 @@ public class Sales implements Serializable {
 
     private Sales(Builder builder){
         this.id = builder.id;
-        this.productList = builder.productList;
         this.discount = builder.discount;
         this.datSales = builder.datSales;
+        this.salesProductList = builder.salesProductList;
 
     }
 
     public static final class Builder {
         private Long id;
-        private List<Product> productList;
         private Double discount;
         private Date datSales;
+        private List<SalesProduct> salesProductList;
 
         public Builder setId(Long id) {
             this.id = id;
-            return this;
-        }
-
-        public Builder setProductList(List<Product> productList) {
-            this.productList = productList;
             return this;
         }
 
@@ -106,5 +81,15 @@ public class Sales implements Serializable {
             this.datSales = datSales;
             return this;
         }
+
+        public Builder setSalesProductList(List<SalesProduct> salesProductList) {
+            this.salesProductList = salesProductList;
+            return this;
+        }
+
+        public Sales build(){
+            return new Sales(this);
+        }
+
     }
 }
