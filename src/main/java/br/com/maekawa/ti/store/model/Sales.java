@@ -1,6 +1,7 @@
 package br.com.maekawa.ti.store.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,23 +12,19 @@ import java.util.List;
 @Table(name = "SALES")
 public class Sales implements Serializable {
 
-    @JsonProperty("id")
     @Id
     @SequenceGenerator(name = "sales-primary", sequenceName = "SQ_SALES_IDT", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sales-primary")
     @Column(name = "IDT_SALES", nullable = false)
     private Long id;
 
-    @JsonProperty("discount")
     @Column(name = "SALES_DISCOUNT", nullable = false)
     private Double discount;
 
-    @JsonProperty("datSales")
     @Column(name = "SALES_DATE", nullable = false)
     private Date datSales;
 
     @OneToMany(cascade = CascadeType.ALL)
-//    @Embedded
     private List<SalesProduct> salesProductList;
 
     public Long getId() {

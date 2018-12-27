@@ -1,9 +1,7 @@
 package br.com.maekawa.ti.store.endpoints;
 
-import br.com.maekawa.ti.store.endpoints.resource.ProductResource;
 import br.com.maekawa.ti.store.endpoints.resource.SalesResource;
 import br.com.maekawa.ti.store.endpoints.resource.SalesResourceAssembler;
-import br.com.maekawa.ti.store.repository.SalesRepository;
 import br.com.maekawa.ti.store.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,8 @@ public class SalesEndpoint {
     private SalesResourceAssembler assembler;
 
     @Autowired
-    public SalesEndpoint(SalesService service, SalesResourceAssembler assembler) {
+    public SalesEndpoint(SalesService service,
+                         SalesResourceAssembler assembler) {
         this.service = service;
         this.assembler = assembler;
     }

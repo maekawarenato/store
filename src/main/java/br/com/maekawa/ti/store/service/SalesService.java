@@ -27,6 +27,5 @@ public class SalesService {
                     sales.setSalesProductList(salesProductRepository.findBySales(sales));
                     return sales;
                 });
-
     }
 }

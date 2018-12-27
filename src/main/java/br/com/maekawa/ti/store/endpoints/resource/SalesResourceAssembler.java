@@ -1,8 +1,6 @@
 package br.com.maekawa.ti.store.endpoints.resource;
 
-import br.com.maekawa.ti.store.endpoints.ProductEndpoint;
 import br.com.maekawa.ti.store.endpoints.SalesEndpoint;
-import br.com.maekawa.ti.store.model.Product;
 import br.com.maekawa.ti.store.model.Sales;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;

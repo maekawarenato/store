@@ -1,6 +1,6 @@
 package br.com.maekawa.ti.store.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Table(name = "SALES_PRODUCT")
 public class SalesProduct implements Serializable {
 
-    @JsonProperty("id")
+    @JsonIgnore
     @Id
     @SequenceGenerator(name = "sales-product-primary", sequenceName = "SQ_SALES_PRODUCT_IDT", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sales-product-primary")
@@ -22,6 +22,7 @@ public class SalesProduct implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "IDT_SALES")
+    @JsonIgnore
     private Sales sales;
 
     @Column(name = "AMOUNT", nullable = false)
@@ -89,5 +90,14 @@ public class SalesProduct implements Serializable {
         public SalesProduct build(){
             return new SalesProduct(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "SalesProduct{" +
+                "id=" + id +
+                ", product=" + product +
+                ", amount=" + amount +
+                '}';
     }
 }

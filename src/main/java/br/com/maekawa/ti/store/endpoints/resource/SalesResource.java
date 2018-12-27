@@ -3,6 +3,7 @@ package br.com.maekawa.ti.store.endpoints.resource;
 import br.com.maekawa.ti.store.model.Sales;
 import br.com.maekawa.ti.store.model.SalesProduct;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
@@ -10,9 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 @Relation(value = "sale", collectionRelation = "sales")
+@JsonPropertyOrder({"salesId",
+        "discount",
+        "datSales",
+        "productList"})
 public class SalesResource extends ResourceSupport {
 
-    @JsonProperty("id")
+    @JsonProperty("salesId")
     private Long id;
     private List<SalesProduct> productList;
     private Double discount;
